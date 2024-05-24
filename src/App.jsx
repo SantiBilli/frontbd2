@@ -3,15 +3,17 @@ import { Routes, Route } from "react-router-dom"
 import { Login } from "./components/Login"
 // import { Dashboard } from "./components/Dashboard"
 import { Register } from "./components/Register"
+import Header from './components/Header'
 
 function App() {
   return (
     <>
-      <Routes>
+      <Header/>
+      {/* <Routes>
           <Route path="*" element={<Login/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
-      </Routes>
+      </Routes> */}
     </>
   )
 }
