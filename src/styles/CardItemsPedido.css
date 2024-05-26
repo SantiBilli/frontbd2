@@ -1,0 +1,73 @@
+.Card-Product-pedido {
+    border: 1px solid rgb(219, 218, 222);
+    width: 100%;
+    border-radius: 6px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+
+}
+
+
+.left-pedido {
+    display: flex;
+    gap: 10px;
+}
+.right-pedido{
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.botones-cantidades {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.agregar-items-pedido-left {
+    width: 20px;
+    border: 1px solid rgb(126, 126, 126);
+    border-radius: 50px 0px 0px 50px;
+    background-color: rgb(151, 151, 151);
+    font-size: 15px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.agregar-items-pedido-medio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(126, 126, 126);
+    background-color: rgb(151, 151, 151);
+    font-size: 12px;
+    cursor: pointer;
+
+}
+
+.agregar-items-pedido-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    border: 1px solid rgb(126, 126, 126);
+    border-radius: 0px 50px 50px 0px;
+    background-color: rgb(151, 151, 151);
+
+
+}
