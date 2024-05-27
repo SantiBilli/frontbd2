@@ -3,6 +3,7 @@ import '../styles/Publicar.css';
 import Header from '../components/Header';
 import { fileUpload } from '../utils/api/fileUpload';
 import { useNavigate } from 'react-router-dom';
+import { checkRol } from '../utils/api/checkRol';
 
 const Publicar = () => {
     const [imagen, setImagen] = useState(null)
@@ -13,6 +14,19 @@ const Publicar = () => {
     const [mostrarBoton, setMostrarBoton] = useState(false)
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const token = localStorage.getItem('userToken')
+        if (!token) return navigate("/login")
+    
+        const checkAdmin = async () => {
+          const responseRol = await checkRol(token);
+    
+          if (responseRol.rol == 'default') return navigate("/login")
+        }
+    
+        checkAdmin()
+      },[])
 
     useEffect(() => {
         if (nombre == "") return setMostrarBoton(false)
