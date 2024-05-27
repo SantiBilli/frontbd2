@@ -8,11 +8,13 @@ import productos from '../Data/Productos2';
 import { sendToken } from '../utils/api/checkToken';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../utils/api/fileUpload';
+import { checkRol } from '../utils/api/checkRol';
 
 
 const Inicio = () => {
 
   const [arr, setArr] = useState([])
+  const [admin, setAdmin] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,15 +34,23 @@ const Inicio = () => {
       setArr(response)
     }
 
+    const checkAdmin = async () => {
+      const responseRol = await checkRol(token);
+      
+      if (responseRol.rol == 'admin') return setAdmin(true)
+      if (responseRol.rol == 'default') return setAdmin(false)
+    }
+
     sendTokenToServer()
     handlePosts()
+    checkAdmin()
   },[])
 
   const [itemsPedido, setItemsPedido] = useState([]);
   
   return (
     <>
-      <Header/>
+      <Header botonAdmin={admin}/>
       <div className="all-box-inicio">
         <div className="left-box-inicio">
           {arr.map ((url,index) => (

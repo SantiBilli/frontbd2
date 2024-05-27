@@ -3,8 +3,6 @@ import '../styles/CardItemsPedido.css'
 import { FaTrash } from "react-icons/fa";
 
 const CardItemsPedido = ({items}) => {
-    
-    console.log(items);
 
     const [cantidad, setCantidad] = useState(1);
 
