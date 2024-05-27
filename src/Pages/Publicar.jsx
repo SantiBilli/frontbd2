@@ -1,37 +1,45 @@
 import React, { useEffect, useState }  from 'react';
 import '../styles/Publicar.css';
 import Header from '../components/Header';
+import { fileUpload } from '../utils/api/fileUpload';
+import { useNavigate } from 'react-router-dom';
 
 const Publicar = () => {
-    const [archivo, setArchivo] = useState(null)
+    const [imagen, setImagen] = useState(null)
     const [nombre, setNombre] = useState("")
-    const [desc, setDesc] = useState("")
+    const [descripcion, setDescripcion] = useState("")
     const [precio, setPrecio] = useState()
     const [error, setError] = useState(false)
     const [mostrarBoton, setMostrarBoton] = useState(false)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (nombre == "") return setMostrarBoton(false)
-        if (desc == "") return setMostrarBoton(false)
+        if (descripcion == "") return setMostrarBoton(false)
         if (precio == "") return setMostrarBoton(false)
-        if (archivo == null) return setMostrarBoton(false)
+        if (imagen == null) return setMostrarBoton(false)
         return setMostrarBoton(true)
-    },[nombre, desc, precio, archivo])
+    },[nombre, descripcion, precio, imagen])
 
     const handleUpload = async () => {
-        const userData = JSON.parse(localStorage.getItem("userData")).userId
         const formdata = new FormData();
-        formdata.append('file', archivo)
-        formdata.append('nameProd', nombre)
-        formdata.append('description', desc)
-        formdata.append('price', precio)
-        formdata.append('userId',userData)
-    const response = await fileUpload(formdata)
+        formdata.append('imagen', imagen)
+        formdata.append('nombreProducto', nombre)
+        formdata.append('descripcion', descripcion)
+        formdata.append('precio', precio)
+    
+        // for (const pair of formdata.entries()) {
+        //     console.log(pair[0], pair[1]);
+        // } //Muestro el formdata
 
-    if (response == 204) return setError(true)
+        const response = await fileUpload(formdata)
 
-    return setError(false)
-        }
+        if (response == 204) return setError(true)
+
+        navigate('/inicio')
+        return setError(false)
+    }
 
 return (
     <>
@@ -45,7 +53,7 @@ return (
             </div> 
             <div className="input-publicar-description">
                 <label>Descripcion:</label>
-                <textarea name="" id="" onChange={event => setDesc(event.target.value)}></textarea>
+                <textarea name="" id="" onChange={event => setDescripcion(event.target.value)}></textarea>
             </div> 
             <div className="input-publicar">
                 <label>Precio:</label>
@@ -53,7 +61,7 @@ return (
             </div> 
             <div className="input-publicar">
                 <label>Adjuntar Imagen:</label>
-                <input type="file" required accept="image/png" onChange={event => setArchivo(event.target.files[0])}/>
+                <input type="file" required accept="image/png" onChange={event => setImagen(event.target.files[0])}/>
             </div> 
             <button className='publicar-boton' disabled={!mostrarBoton} onClick={handleUpload}>PUBLICAR PRODUCTO</button>
         </div>

@@ -6,8 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 
 export function Login() {
 
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [contra, setContra] = useState('');
     const [passStatus, setPassStatus] = useState(false)
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export function Login() {
     }, []) //Borrar Local Storage en el primer render.
 
     const submitForm = async () => {
-        const response = await sendLoginForm({mail, password})
+        const response = await sendLoginForm({email, contra})
 
         if (response == 401) {
             setPassStatus(true)
@@ -27,7 +27,7 @@ export function Login() {
         localStorage.setItem("userToken",JSON.stringify(response.token))
         localStorage.setItem("userData",JSON.stringify(response.userData))
 
-        navigate("/dashboard")
+        navigate("/inicio")
         return
     }
 
@@ -50,11 +50,11 @@ export function Login() {
                     <form>
                         <div>
                             <div className = "input-box">
-                                <input type="text" required onChange={event => setMail(event.target.value)}/>
+                                <input type="text" required onChange={event => setEmail(event.target.value)}/>
                                 <label>Email</label>
                             </div>
                             <div className = "input-box">
-                                <input type="password" required onChange={event => setPassword(event.target.value)}/>
+                                <input type="password" required onChange={event => setContra(event.target.value)}/>
                                 <label>Password</label>
                             </div>
                             <div className = "recordarme">
