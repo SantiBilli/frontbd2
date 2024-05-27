@@ -6,7 +6,6 @@ import { Register } from "./components/Register";
 import Header from './components/Header';
 import Inicio from './Pages/Inicio';
 import Publicar from './Pages/Publicar';
-import { CartProvider } from 'react-use-cart';
 
 
 function App() {

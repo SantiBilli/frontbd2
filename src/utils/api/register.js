@@ -1,5 +1,8 @@
 export const sendRegisterForm = async (credentials) => {
-    const response = await fetch("https://sipback-production.up.railway.app/api/register", {
+    
+    console.log(credentials);
+
+    const response = await fetch("https://backbd2-production.up.railway.app/api/register", {
         method: "POST",
         mode: "cors",
         headers: {"Content-Type": "application/json"},

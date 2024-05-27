@@ -1,17 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../components/Header';
 import CardItems from '../components/CardItems';
 import '../styles/Inicio.css';
 import Vacio from '../assets/Vacio.svg';
 import CardItemsPedido from '../components/CardItemsPedido';
 import productos from '../Data/Productos2';
+import { sendToken } from '../utils/api/checkToken';
+import { useNavigate } from 'react-router-dom';
+import { getPosts } from '../utils/api/fileUpload';
 
 
 const Inicio = () => {
+
+  const [arr, setArr] = useState([])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem('userToken')
+    if (!token) return navigate("/login")
+    
+    const sendTokenToServer = async () => {
+      const response = await sendToken(token)
+      if (response == false) return navigate('/login')
+    }
+
+    const handlePosts = async () => {
+      const response = await getPosts();
+
+      if (!response) return
+  
+      setArr(response)
+    }
+
+    sendTokenToServer()
+    handlePosts()
+  },[])
+
   const [itemsPedido, setItemsPedido] = useState([]);
-
-  const arr = productos;
-
+  
   return (
     <>
       <Header/>
