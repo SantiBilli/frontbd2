@@ -2,16 +2,16 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginRegister.css"
 import { sendRegisterForm } from "../utils/api/register";
-// import { sendCheckEmail } from "../utils/api/checkEmail";
+import { sendCheckEmail } from "../utils/api/checkEmail";
 import { useState, useEffect } from 'react'
 
 export const Register = () => {
     
-    const [mail, setMail] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [birthday, setBirthday] = useState(null); //Date termina de ser null cauando esta completa /año
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [dni, setDni] = useState('');
+    const [contra, setContra] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [enableButton, setEnableButton] = useState(false);
     const [emailExists, setEmailExists] = useState(false);
@@ -20,23 +20,24 @@ export const Register = () => {
 
     useEffect(() => {
         if (emailExists) return setEnableButton(false)
-        if (!mail.includes("@")) return setEnableButton(false)
-        if (password != repeatPassword) return setEnableButton(false)
-        if (!birthday) return setEnableButton(false)
-        if (name == "") return setEnableButton(false)
-        if (surname == "") return setEnableButton(false)
+        if (!email.includes("@")) return setEnableButton(false)
+        if (contra != repeatPassword) return setEnableButton(false)
+        if (!dni) return setEnableButton(false)
+        if (nombre == "") return setEnableButton(false)
+        if (apellido == "") return setEnableButton(false)
         setEnableButton(true)
-    }, [mail, password, repeatPassword, emailExists, birthday, name, surname])
+    }, [email, contra, repeatPassword, emailExists, dni, nombre, apellido])
 
     useEffect(() => {
         const checker = async () => {
-            await checkEmailAPI({mail})
+            await checkEmailAPI({email})
         }
         checker() 
-    }, [mail])
+    }, [email])
 
     const checkEmailAPI = async () => {
-        const response = await sendCheckEmail({mail})
+        const response = await sendCheckEmail({email})
+        
         if (response == 204) {
             setEmailExists(false)
             return
@@ -45,8 +46,11 @@ export const Register = () => {
     }
 
     const submitForm = async () => {
-        const response = await sendRegisterForm({mail, name, surname, birthday, password})
+
+        const response = await sendRegisterForm({email, nombre, apellido, dni, contra})
+
         if (response === false) return
+        
         return navigate("/login")
     }
 
@@ -63,23 +67,23 @@ export const Register = () => {
                         <h2>Register</h2>
                         <form className="input-form">
                             <div className = "input-box">
-                                <input type="text" required onChange={event => setMail(event.target.value)}/>
+                                <input type="text" required onChange={event => setEmail(event.target.value)}/>
                                 <label>Email</label>
                             </div>
                             <div className = "input-box">
-                                <input required onChange={event => setName(event.target.value)}/>
+                                <input required onChange={event => setNombre(event.target.value)}/>
                                 <label>Name</label>
                             </div>
                             <div className = "input-box">
-                                <input required onChange={event => setSurname(event.target.value)}/>
+                                <input required onChange={event => setApellido(event.target.value)}/>
                                 <label>Surname</label>
                             </div>
                             <div className = "input-box">
-                                <input type="date" required onChange={event => setBirthday(event.target.value)}/>
-                                <label>Birthday</label>
+                                <input required onChange={event => setDni(event.target.value)}/>
+                                <label>DNI</label>
                             </div>
                             <div className = "input-box">
-                                <input type="password" required onChange={event => setPassword(event.target.value)}/>
+                                <input type="password" required onChange={event => setContra(event.target.value)}/>
                                 <label>Password</label>
                             </div>
                             <div className = "input-box">
@@ -91,10 +95,10 @@ export const Register = () => {
                             <div className="errors">
                                 {!enableButton && <h1 className="error">Error:</h1>}
                                 {emailExists && <h1 className="error">{'> Email used'}</h1>}
-                                {!mail.includes("@") && <h1 className="error">{'> Mail in incorrect form'}.</h1>}
-                                {!birthday && <h1 className="error">{'> Invalid birthday'}</h1>}
-                                {password != repeatPassword && <h1 className="error">{'> Passwords do not match'}</h1>}
-                                {(name == "" || surname == "") && <h1 className="error">{'> Incomplete fields'}</h1>}
+                                {!email.includes("@") && <h1 className="error">{'> Mail in incorrect form'}.</h1>}
+                                {!dni && <h1 className="error">{'> Invalid birthday'}</h1>}
+                                {contra != repeatPassword && <h1 className="error">{'> Passwords do not match'}</h1>}
+                                {(nombre == "" || apellido == "") && <h1 className="error">{'> Incomplete fields'}</h1>}
                             </div>
                             
                         </form>
