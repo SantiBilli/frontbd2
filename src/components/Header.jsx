@@ -15,7 +15,7 @@ const Header = ({botonAdmin}) => {
         <div className="header-right">
             <button>User</button>
             <button><FaShoppingCart/></button>
-            <button style={{display: botonAdmin ? 'flex' : 'none'}} onClick={() => {navigate("/publicar")}}>Admin Config</button>
+            <button style={{display: botonAdmin ? 'flex' : 'none'}} onClick={() => {navigate("/publicar")}}>Upload</button>
         </div>
     </header>
   )
