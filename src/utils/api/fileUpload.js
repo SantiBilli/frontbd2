@@ -22,7 +22,7 @@ export const fileUpload = async (formdata) => {
 export const getPosts = async () => {
     const token = localStorage.getItem("userToken")
 
-    const response = await fetch("https://backbd2-production.up.railway.app/api/get-products", {
+    const response = await fetch("http://localhost:3500/api/get-products", {
         method: "GET",
         mode: "cors",
         headers: {"Authorization":`Bearer ${token}`}
