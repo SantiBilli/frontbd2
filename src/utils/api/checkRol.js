@@ -1,6 +1,6 @@
 export const checkRol = async (token) => {
 
-    const response = await fetch("https://backbd2-production.up.railway.app/api/check-rol", {
+    const response = await fetch("http://localhost:3500/api/check-rol", {
         method: "POST",
         mode: "cors",
         headers: {"Content-Type": "application/json", "Authorization":`Bearer ${token}`}
