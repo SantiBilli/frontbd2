@@ -2,7 +2,7 @@ export const sendRegisterForm = async (credentials) => {
     
     console.log(credentials);
 
-    const response = await fetch("https://backbd2-production.up.railway.app/api/register", {
+    const response = await fetch("http://localhost:3500/api/register", {
         method: "POST",
         mode: "cors",
         headers: {"Content-Type": "application/json"},
