@@ -15,17 +15,36 @@ export const getCarrito = async (credentials) => {
 }
 
 
-// export const agregarNuevoItem = async (credentials) => {
-//     const token = localStorage.getItem("userToken")
+export const agregarNuevoItem = async (credentials) => {
 
-//     const response = await fetch("http://localhost:3500/api/get-carrito", {
-//         method: "POST",
-//         mode: "cors",
-//         headers: {"Authorization":`Bearer ${token}`},
-//         body: JSON.stringify(credentials)
-//     })
+    const token = localStorage.getItem("userToken")
 
-//     if (!response.ok) return false
+    const response = await fetch("http://localhost:3500/api/agregar-producto-carrito", {
+        method: "POST",
+        mode: "cors",
+        headers: {"Content-Type": "application/json", "Authorization":`Bearer ${token}`},
+        body: JSON.stringify(credentials)
+    })
 
-//     return true
-// }
+    if (response.status == 500) return false
+
+    return true
+}
+
+export const cambiarCantidad = async (credentials) => {
+
+    const token = localStorage.getItem("userToken")
+    
+    console.log(credentials);
+
+    const response = await fetch("http://localhost:3500/api/cambiar-cantidad", {
+        method: "POST",
+        mode: "cors",
+        headers: {"Content-Type": "application/json", "Authorization":`Bearer ${token}`},
+        body: JSON.stringify(credentials)
+    })
+
+    if (response.status == 500) return false
+
+    return true
+}
