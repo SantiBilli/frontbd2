@@ -9,16 +9,24 @@ import { sendToken } from '../utils/api/checkToken';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../utils/api/fileUpload';
 import { checkRol } from '../utils/api/checkRol';
+import { getCarrito } from '../utils/api/getCarrito';
 
 
 const Inicio = () => {
 
   const [arr, setArr] = useState([])
   const [admin, setAdmin] = useState(false)
+  const [arrCarrito, setArrCarrito] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
     const token = localStorage.getItem('userToken')
+
+    const userDataStriong = localStorage.getItem('userData')
+    const userDataJSON = JSON.parse(userDataStriong)
+    // console.log(userDataJSON);
+    const userId = userDataJSON.userId
+
     if (!token) return navigate("/login")
     
     const sendTokenToServer = async () => {
@@ -30,7 +38,7 @@ const Inicio = () => {
       const response = await getPosts();
 
       if (!response) return
-  
+
       setArr(response)
     }
 
@@ -41,32 +49,44 @@ const Inicio = () => {
       if (responseRol.rol == 'default') return setAdmin(false)
     }
 
+    const obtenerCarrito = async () => {
+      const carrito = await getCarrito({userId})
+
+      if (carrito == false) return
+
+      setArrCarrito(carrito.productos);
+    }
+
     sendTokenToServer()
     handlePosts()
     checkAdmin()
+    obtenerCarrito()
   },[])
 
   const [itemsPedido, setItemsPedido] = useState([]);
-  
+
   return (
     <>
       <Header botonAdmin={admin}/>
       <div className="all-box-inicio">
         <div className="left-box-inicio">
-          {arr.map ((url,index) => (
-            <CardItems key={index} url={url} setItemsPedido={setItemsPedido} />
+          {arr.map ((url) => (
+            <CardItems key={url._id} url={url} listaCarrito = {arrCarrito} setItemsPedido={setItemsPedido} />
           ))}
         </div>
         <hr className='linea-media-inicio'/>
-        
+    
         <div className='right-box-inicio'>
           <h3>Mi pedido</h3>
-          <img src={Vacio} alt="" />
-          <p>El pedido esta vacio!</p>
-          <CardItemsPedido/>
+          <div style={{display: arrCarrito.length == 0 ? 'flex' : 'none'}}>
+            <img src={Vacio} alt=""/>
+            <p>El pedido esta vacio!</p>
+          </div>
+          {arrCarrito.map ((url) => (
+            <CardItemsPedido parametros={url} key={url.idProducto}/>
+          ))}
           <button className='boton-pagar'>Pagar</button>
         </div>
-        
       </div>
     </>
   )

@@ -87,3 +87,11 @@
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
 }
+
+.buy02:disabled {
+    --main-focus: #2d8bf08f;
+    --font-color: #3232327c;
+    --bg-color-sub: #dedede75;
+    --bg-color: #ffffff79;
+    --main-color: #0000007a;
+}
