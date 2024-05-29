@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/CardItemsPedido.css';
 import { FaTrash } from 'react-icons/fa';
-import { cambiarCantidad } from '../utils/api/getCarrito';
+import { borrarProducto, cambiarCantidad } from '../utils/api/getCarrito';
 
 const CardItemsPedido = ({parametros}) => {
 
@@ -9,7 +9,6 @@ const CardItemsPedido = ({parametros}) => {
     
     const userDataStriong = localStorage.getItem('userData')
     const userDataJSON = JSON.parse(userDataStriong)
-    // console.log(userDataJSON);
     const userId = userDataJSON.userId
     const idProducto = parametros.idProducto
 
@@ -30,6 +29,13 @@ const CardItemsPedido = ({parametros}) => {
         cambioCantidad()
     }, [cantidad])
 
+    const handleClickTrash = async () => {
+        console.log(1);
+        const borrar = await borrarProducto({userId, idProducto})
+
+        return
+    }
+
     return (
         <div className='pedidos-box'>
             <div className='Card-Product-pedido'>
@@ -42,7 +48,7 @@ const CardItemsPedido = ({parametros}) => {
                         <p>${parametros.precio}</p>
                         <div className='botones-cantidades'>
                             <button className='agregar-items-pedido-left' onClick={handleClickRestar}>-</button>
-                            <button className='agregar-items-pedido-medio' ><FaTrash/></button>
+                            <button className='agregar-items-pedido-medio' onClick={handleClickTrash}><FaTrash/></button>
                             <button className='agregar-items-pedido-right' onClick={handleClickSumar}>+</button>
                         </div>
                     </div>
