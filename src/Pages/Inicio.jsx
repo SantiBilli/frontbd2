@@ -4,7 +4,6 @@ import CardItems from '../components/CardItems';
 import '../styles/Inicio.css';
 import Vacio from '../assets/Vacio.svg';
 import CardItemsPedido from '../components/CardItemsPedido';
-import productos from '../Data/Productos2';
 import { sendToken } from '../utils/api/checkToken';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../utils/api/fileUpload';
@@ -58,12 +57,10 @@ const Inicio = () => {
     }
 
     sendTokenToServer()
+    obtenerCarrito()
     handlePosts()
     checkAdmin()
-    obtenerCarrito()
   },[])
-
-  const [itemsPedido, setItemsPedido] = useState([]);
 
   return (
     <>
@@ -71,7 +68,7 @@ const Inicio = () => {
       <div className="all-box-inicio">
         <div className="left-box-inicio">
           {arr.map ((url) => (
-            <CardItems key={url._id} url={url} listaCarrito = {arrCarrito} setItemsPedido={setItemsPedido} />
+            <CardItems key={url._id} url={url} listaCarrito = {arrCarrito}/>
           ))}
         </div>
         <hr className='linea-media-inicio'/>
