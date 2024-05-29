@@ -23,7 +23,6 @@ const Inicio = () => {
 
     const userDataStriong = localStorage.getItem('userData')
     const userDataJSON = JSON.parse(userDataStriong)
-    // console.log(userDataJSON);
     const userId = userDataJSON.userId
 
     if (!token) return navigate("/login")
@@ -68,7 +67,7 @@ const Inicio = () => {
       <div className="all-box-inicio">
         <div className="left-box-inicio">
           {arr.map ((url) => (
-            <CardItems key={url._id} url={url} listaCarrito = {arrCarrito}/>
+            <CardItems key={url._id} url={url}/>
           ))}
         </div>
         <hr className='linea-media-inicio'/>
