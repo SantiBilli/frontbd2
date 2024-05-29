@@ -63,7 +63,7 @@ const Inicio = () => {
           <h3>Mi pedido</h3>
           <img src={Vacio} alt="" />
           <p>El pedido esta vacio!</p>
-          {/* <CardItemsPedido  items={itemsPedido}/> */}
+          <CardItemsPedido/>
           <button className='boton-pagar'>Pagar</button>
         </div>
         
