@@ -2,22 +2,33 @@ import React, { useState, useEffect } from 'react';
 import '../styles/CardItemsPedido.css';
 import { FaTrash } from 'react-icons/fa';
 
-const CardItemsPedido = () => {
+const CardItemsPedido = ({parametros}) => {
+
+    const [cantidad, setCantidad] = useState(parametros.cantidad)
+
+    const handleClickRestar = async () => {
+        if (cantidad == 1) return
+        setCantidad(cantidad-1)
+    }
+    
+    const handleClickSumar = async () => {
+        setCantidad(cantidad+1)
+    }
 
     return (
         <div className='pedidos-box'>
             <div className='Card-Product-pedido'>
                 <div className="left-pedido">
-                    <p className='cantidad-items-pedido'>1x</p>
-                    <p className='nombre-item-pedido'>Agua Mineral</p>
+                    <p className='cantidad-items-pedido'>{cantidad}x</p>
+                    <p className='nombre-item-pedido'>{parametros.nombreProducto}</p>
                 </div>
                 <div className="right-pedido">
                     <div className='box-right-pedido'>
-                        <p>$700</p>
+                        <p>${parametros.precio}</p>
                         <div className='botones-cantidades'>
-                            <button className='agregar-items-pedido-left' >-</button>
-                            <button className='agregar-items-pedido-medio' ><FaTrash /></button>
-                            <button className='agregar-items-pedido-right' >+</button>
+                            <button className='agregar-items-pedido-left' onClick={handleClickRestar}>-</button>
+                            <button className='agregar-items-pedido-medio' ><FaTrash/></button>
+                            <button className='agregar-items-pedido-right' onClick={handleClickSumar}>+</button>
                         </div>
                     </div>
                 </div>
