@@ -1,13 +1,13 @@
 export const fileUpload = async (formdata) => {
     const token = localStorage.getItem("userToken")
     
-    for (const pair of formdata.entries()) {
-       console.log(pair[0], pair[1]);
-    } //Muestro el formdata
+    // for (const pair of formdata.entries()) {
+    //    console.log(pair[0], pair[1]);
+    // } //Muestro el formdata
 
     if (!token) return
 
-    const response = await fetch("https://backbd2-production.up.railway.app/api/upload-product", {
+    const response = await fetch("http://localhost:3500/api/upload-product", {
         method: "POST",
         mode: "cors",
         headers: {"Authorization":`Bearer ${token}`},
