@@ -8,7 +8,7 @@ const CardItems = ({url}) => {
 
   const userDataStriong = localStorage.getItem('userData')
   const userDataJSON = JSON.parse(userDataStriong)
-  const idUsuario = userDataJSON.userId
+  const userId = userDataJSON.userId
 
   const idProducto = url._id
   const nombreProducto = url.nombreProducto
@@ -16,13 +16,13 @@ const CardItems = ({url}) => {
   const cantidad = 1
 
   const handleClick = async () => {
-    const agregarItem = await agregarNuevoItem({idUsuario, idProducto, nombreProducto, precio, cantidad})
+    const agregarItem = await agregarNuevoItem({userId, idProducto, nombreProducto, precio, cantidad})
     if (agregarItem == false) return console.log("Error");
     return
   }
 
   const obtenerCarrito = async () => {
-    const carrito = await getCarrito({idUsuario})
+    const carrito = await getCarrito({userId})
     const productoExiste = carrito.productos.some(producto => producto.nombreProducto === url.nombreProducto);
     if (productoExiste == true) return
     handleClick()
