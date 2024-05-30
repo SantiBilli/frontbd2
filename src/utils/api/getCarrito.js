@@ -5,7 +5,7 @@ export const getCarrito = async (credentials) => {
     const response = await fetch("http://localhost:3500/api/get-carrito", {
         method: "POST",
         mode: "cors",
-        headers: {"Authorization":`Bearer ${token}`},
+        headers: {"Content-Type": "application/json","Authorization":`Bearer ${token}`},
         body: JSON.stringify(credentials)
     })
 

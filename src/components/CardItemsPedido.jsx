@@ -23,7 +23,7 @@ const CardItemsPedido = ({parametros}) => {
 
     useEffect(() => {
         const cambioCantidad = async () => {
-            const cambioCantidad = await cambiarCantidad({userId, idProducto, cantidad})
+            await cambiarCantidad({userId, idProducto, cantidad})
         }
 
         cambioCantidad()
@@ -31,7 +31,7 @@ const CardItemsPedido = ({parametros}) => {
 
     const handleClickTrash = async () => {
         console.log(1);
-        const borrar = await borrarProducto({userId, idProducto})
+        await borrarProducto({userId, idProducto})
 
         return
     }
