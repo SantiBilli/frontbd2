@@ -23,11 +23,11 @@ const Inicio = () => {
   useEffect(() => {
     const token = localStorage.getItem('userToken')
 
+    if (!token) return navigate("/login")
+    
     const userDataStriong = localStorage.getItem('userData')
     const userDataJSON = JSON.parse(userDataStriong)
     const userId = userDataJSON.userId
-
-    if (!token) return navigate("/login")
     
     const sendTokenToServer = async () => {
       const response = await sendToken(token)
@@ -61,10 +61,14 @@ const Inicio = () => {
     obtenerCarrito()
     handlePosts()
     checkAdmin()
+
   },[])
 
   useEffect(() => {
     const userDataStriong = localStorage.getItem('userData')
+
+    if (!userDataStriong) return navigate("/login")
+
     const userDataJSON = JSON.parse(userDataStriong)
     const userId = userDataJSON.userId
 
