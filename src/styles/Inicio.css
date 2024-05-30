@@ -19,13 +19,20 @@
     justify-content: center;
     align-items: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
     height: fit-content;
 }
 
+.right-box-inicio-vacio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .right-box-inicio {
     display: flex;
+    
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -41,9 +48,16 @@
 .boton-pagar {
     width: 100%;
     border-radius: 6px;
-    height: 30px;
+    height: 50px;
     border: none;
     background-color: #dedede;
     cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.boton-pagar:hover {
+    background-color: #dedede6c;
 
 }

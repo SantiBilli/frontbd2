@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/Header.css';
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { MdAddShoppingCart } from "react-icons/md";
 
 const Header = ({botonAdmin}) => {
 
@@ -13,9 +14,8 @@ const Header = ({botonAdmin}) => {
             <h2>Mini Market</h2>
         </div>
         <div className="header-right">
-            <button>User</button>
-            <button><FaShoppingCart/></button>
-            <button style={{display: botonAdmin ? 'flex' : 'none'}} onClick={() => {navigate("/publicar")}}>Upload</button>
+            <button className='cart-header'><FaShoppingCart/></button>
+            <button className = 'header-upload' style={{display: botonAdmin ? 'flex' : 'none'}} onClick={() => {navigate("/publicar")}}>UPLOAD<MdAddShoppingCart/></button>
         </div>
     </header>
   )
