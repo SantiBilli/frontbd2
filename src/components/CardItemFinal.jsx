@@ -3,25 +3,27 @@ import '../styles/CardItemFinal.css'
 
 
 
-const CardItemFinal = () => {
+const CardItemFinal = ({url}) => {
 
-
-
-  return (
-    <div className='pedidosFinal-box'>
-        <div className='Card-Product-pedidoFinal'>
-            <div className="left-pedidoFinal">
-                <p className='cantidad-items-pedidoFinal'>1x</p>
-                <p className='nombre-item-pedidoFinal'>Agua</p>
-            </div>
-            <div className="right-pedidoFinal">
-                <div className='box-right-pedidoFinal'>
-                    <p>$1000</p>
+    return (
+        <>
+        { url && 
+        <div className='pedidosFinal-box'>
+            <div className='Card-Product-pedidoFinal'>
+                <div className="left-pedidoFinal">
+                    <p className='cantidad-items-pedidoFinal'>{url.cantidad}x</p>
+                    <p className='nombre-item-pedidoFinal'>{url.nombreProducto}</p>
+                </div>
+                <div className="right-pedidoFinal">
+                    <div className='box-right-pedidoFinal'>
+                        <p>${url.precio*url.cantidad}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-  )
+        }
+        </>
+    )
 }
 
 export default CardItemFinal

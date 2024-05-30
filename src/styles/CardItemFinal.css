@@ -12,21 +12,16 @@
 
 }
 
-
 .left-pedidoFinal {
     display: flex;
     gap: 10px;
 }
+
 .right-pedidoFinal{
     display: flex;
     height: 100%;
     align-items: center;
 }
-
-
-
-
-
 
 .pedidosFinal-box {
     width: 100%;

@@ -12,6 +12,7 @@ const Publicar = () => {
     const [precio, setPrecio] = useState()
     const [error, setError] = useState(false)
     const [mostrarBoton, setMostrarBoton] = useState(false)
+    const [descuento, setDescuento] = useState("")
 
     const navigate = useNavigate()
 
@@ -42,6 +43,7 @@ const Publicar = () => {
         formdata.append('nombreProducto', nombre)
         formdata.append('descripcion', descripcion)
         formdata.append('precio', precio)
+        formdata.append('descuento', descuento)
     
         // for (const pair of formdata.entries()) {
         //     console.log(pair[0], pair[1]);
@@ -72,6 +74,10 @@ return (
             <div className="input-publicar">
                 <label>Precio:</label>
                 <input type="text" required onChange={event => setPrecio(event.target.value)}/>
+            </div> 
+            <div className="input-publicar">
+                <label>Descuento:</label>
+                <input type="text" required onChange={event => setDescuento(event.target.value)}/>
             </div> 
             <div className="input-publicar">
                 <label>Adjuntar Imagen:</label>

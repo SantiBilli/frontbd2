@@ -98,7 +98,7 @@
 }
 
 .pagar-pedido {
-    display: inline-block;
+    display: flex;
     padding: 0.9rem 1.8rem;
     font-size: 16px;
     font-weight: 700;
@@ -112,6 +112,8 @@
     z-index: 1;
     font-family: inherit;
     border-radius: 30px;
+    justify-content: center;
+    align-items: center;
    }
    
 .pagar-pedido::before {
