@@ -1,8 +1,8 @@
 export const sendRegisterForm = async (credentials) => {
     
-    console.log(credentials);
+    //console.log(credentials);
 
-    const response = await fetch("http://localhost:3500/api/register", {
+    const response = await fetch("http://localhost:3500/api/register/", {
         method: "POST",
         mode: "cors",
         headers: {"Content-Type": "application/json"},
