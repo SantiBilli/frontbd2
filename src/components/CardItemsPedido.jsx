@@ -30,7 +30,7 @@ const CardItemsPedido = ({parametros, refresh}) => {
     }, [cantidad])
 
     const handleClickTrash = async () => {
-        console.log(1);
+        // console.log(1);
         await borrarProducto({userId, idProducto})
         refresh((prev) => !prev)
         return
