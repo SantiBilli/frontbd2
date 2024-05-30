@@ -1,0 +1,132 @@
+.pedido-box {
+    display: flex;
+    justify-content: space-evenly;
+    height: 80vh;
+    align-items: center;
+}
+
+.pedido-box-right {
+    border: 1px solid black;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.data-pedido input {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.data-pedido p {
+    font-size: 16px;
+
+}
+
+.data-pedido input:focus {
+    border: none;
+    outline: none;
+}
+
+.pedido-box-left {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* background-color: red; */
+    padding: 20px;
+}
+.data-pedido {
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.precio-total-suma {
+    display: flex;
+    justify-content: space-between;
+}
+
+.precio-total-suma h5 {
+    font-weight: 700px;
+    font-size: 16px;
+}
+
+.tipo-precio {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.valor-precio {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+
+.data-pedido p {
+    padding: 6px;
+}
+
+.data-pedido label {
+    font-weight: 700;
+}
+
+.barra-pedido {
+    border: 1px solid black;
+    height: 80%;
+}
+
+.select-iva-pedido {
+    background-color: transparent;
+    height: 40px;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+}
+
+.select-iva-pedido:focus {
+    border: none;
+    outline: none;
+}
+
+.pagar-pedido {
+    display: inline-block;
+    padding: 0.9rem 1.8rem;
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 1;
+    font-family: inherit;
+    border-radius: 30px;
+   }
+   
+.pagar-pedido::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.233);
+    transform: translateX(-100%);
+    transition: all .3s;
+    z-index: -1;
+   }
+   
+.pagar-pedido:hover::before {
+    transform: translateX(0);
+   }
