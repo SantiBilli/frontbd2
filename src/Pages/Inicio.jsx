@@ -92,14 +92,14 @@ const Inicio = () => {
     
         <div className='right-box-inicio'>
           <h3>Mi pedido</h3>
-          <div style={{display: arrCarrito.length == 0 ? 'flex' : 'none'}}>
+          <div className = 'right-box-inicio-vacio' style={{display: arrCarrito.length == 0 ? 'flex' : 'none'}}>
             <img src={Vacio} alt=""/>
             <p>El pedido esta vacio!</p>
           </div>
           {arrCarrito.map ((url) => (
             <CardItemsPedido parametros={url} key={url.idProducto} refresh={setRefresh}/>
           ))}
-          <button className='boton-pagar' onClick={() => navigate("/pedido")}>Pagar</button>
+          <button className='boton-pagar' onClick={() => navigate("/pedido")}>Realizar Pedido</button>
         </div>
       </div>
     </>

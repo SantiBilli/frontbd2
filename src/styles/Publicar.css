@@ -58,7 +58,8 @@
     font-family: sans-serif;
     font-weight: bold;
     background-color: transparent;
-
+    color: black;
+    transition: 0.4s;
 }
 
 .publicar-boton:hover {

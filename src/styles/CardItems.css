@@ -1,5 +1,5 @@
 .Card-Product img {
-    width: 40%;
+    width: 30%;
 }
 
 .Card-Product {
@@ -11,6 +11,7 @@
     background-color: white;
     padding: 13px;
     gap: 10px;
+    height: 260px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .3);
 
 }

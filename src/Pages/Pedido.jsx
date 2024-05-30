@@ -5,6 +5,8 @@ import { getCarrito } from '../utils/api/getCarrito';
 import CardItemFinal from '../components/CardItemFinal';
 import { getDatosUsuario } from '../utils/api/datosUsuario';
 import { crearPedido } from '../utils/api/crearPedido';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 
 const Pedido = () => {
@@ -15,9 +17,23 @@ const Pedido = () => {
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [total, setTotal] = useState(0);
-    const [direccion, setDireccion] = useState('')
-    const [iva, setIva] = useState('')
-    const [pago, setPago] = useState('')
+    const [direccion, setDireccion] = useState("")
+    const [iva, setIva] = useState('Seleccione condicion ante el IVA')
+    const [pago, setPago] = useState('Seleccione metodo de pago')
+    const navigate = useNavigate()
+
+    const [enableButton, setEnableButton] = useState(false)
+
+    useEffect(() => {
+        if (direccion == "") return setEnableButton(false)
+        if (nombre == "") return setEnableButton(false)
+        if (apellido == "") return setEnableButton(false)
+        if (iva == 'Seleccione condicion ante el IVA') return setEnableButton(false)
+        if (pago == 'Seleccione metodo de pago') return setEnableButton(false)
+
+        setEnableButton(true)
+
+    }, [direccion, nombre, apellido, iva, pago])
 
     useEffect(() => {
         const userDataStriong = localStorage.getItem('userData')
@@ -48,6 +64,7 @@ const Pedido = () => {
             setApellido(datos.apellido)
         }
         
+        
 
         obtenerCarrito()
         datosUsuario()
@@ -61,6 +78,8 @@ const Pedido = () => {
     const handleClick = async () => {
         const subtotal = total - descuento + total*0.21
         const generarPedido = await crearPedido({arrCarrito, userId, nombre, apellido, direccion, iva, pago, subtotal})
+
+        navigate('/inicio')
     }
 
   return (
@@ -106,7 +125,7 @@ const Pedido = () => {
                 <label>Metodo de pago:</label>
                 <div className='select-iva-conteiner'>
                     <select className= 'select-iva-pedido' id="opciones" onChange={event => setPago(event.target.value)}>
-                        <option value="opcion1">Seleccione metodo de pago</option>
+                        <option value="Seleccione metodo de pago">Seleccione metodo de pago</option>
                         <option value="Efectivo">Efectivo</option>
                         <option value="Tarjeta Credito">Tarjeta Credito</option>
                         <option value="Tarjeta Debito">Tarjeta Debito</option>
@@ -128,7 +147,7 @@ const Pedido = () => {
                 </div>
 
             </div>
-            <a className="pagar-pedido" onClick={handleClick}>Pagar Subtotal</a>
+            <button className="pagar-pedido" onClick={handleClick} disabled={!enableButton}>Pagar Subtotal</button>
         </div>
 
         <hr className='barra-pedido'/>
