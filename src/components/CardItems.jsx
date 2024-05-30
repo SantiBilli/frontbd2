@@ -4,7 +4,7 @@ import Agua from '../assets/agua.jpg';
 import { agregarNuevoItem, getCarrito } from '../utils/api/getCarrito';
 
 
-const CardItems = ({url}) => {
+const CardItems = ({url, refresh}) => {
 
   const userDataStriong = localStorage.getItem('userData')
   const userDataJSON = JSON.parse(userDataStriong)
@@ -14,10 +14,12 @@ const CardItems = ({url}) => {
   const nombreProducto = url.nombreProducto
   const precio = url.precio
   const cantidad = 1
+  const descuento = url.descuento
 
   const handleClick = async () => {
-    const agregarItem = await agregarNuevoItem({userId, idProducto, nombreProducto, precio, cantidad})
+    const agregarItem = await agregarNuevoItem({userId, idProducto, nombreProducto, precio, cantidad, descuento})
     if (agregarItem == false) return console.log("Error");
+    refresh((prev) => !prev)
     return
   }
 

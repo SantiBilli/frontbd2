@@ -3,7 +3,7 @@ import '../styles/CardItemsPedido.css';
 import { FaTrash } from 'react-icons/fa';
 import { borrarProducto, cambiarCantidad } from '../utils/api/getCarrito';
 
-const CardItemsPedido = ({parametros}) => {
+const CardItemsPedido = ({parametros, refresh}) => {
 
     const [cantidad, setCantidad] = useState(parametros.cantidad)
     
@@ -32,7 +32,7 @@ const CardItemsPedido = ({parametros}) => {
     const handleClickTrash = async () => {
         console.log(1);
         await borrarProducto({userId, idProducto})
-
+        refresh((prev) => !prev)
         return
     }
 
