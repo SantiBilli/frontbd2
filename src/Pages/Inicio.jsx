@@ -18,6 +18,8 @@ const Inicio = () => {
   const [arrCarrito, setArrCarrito] = useState([])
   const navigate = useNavigate()
 
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem('userToken')
 
@@ -61,13 +63,29 @@ const Inicio = () => {
     checkAdmin()
   },[])
 
+  useEffect(() => {
+    const userDataStriong = localStorage.getItem('userData')
+    const userDataJSON = JSON.parse(userDataStriong)
+    const userId = userDataJSON.userId
+
+    const obtenerCarrito = async () => {
+      const carrito = await getCarrito({userId})
+
+      if (carrito == false) return
+
+      setArrCarrito(carrito.productos);
+    }
+
+    obtenerCarrito()
+  }, [refresh]);
+
   return (
     <>
       <Header botonAdmin={admin}/>
       <div className="all-box-inicio">
         <div className="left-box-inicio">
           {arr.map ((url) => (
-            <CardItems key={url._id} url={url}/>
+            <CardItems key={url._id} url={url} refresh={setRefresh}/>
           ))}
         </div>
         <hr className='linea-media-inicio'/>
@@ -79,9 +97,9 @@ const Inicio = () => {
             <p>El pedido esta vacio!</p>
           </div>
           {arrCarrito.map ((url) => (
-            <CardItemsPedido parametros={url} key={url.idProducto}/>
+            <CardItemsPedido parametros={url} key={url.idProducto} refresh={setRefresh}/>
           ))}
-          <button className='boton-pagar'>Pagar</button>
+          <button className='boton-pagar' onClick={() => navigate("/pedido")}>Pagar</button>
         </div>
       </div>
     </>

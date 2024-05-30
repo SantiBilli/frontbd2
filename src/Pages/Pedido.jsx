@@ -2,35 +2,66 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import '../styles/Pedido.css'
 import { getCarrito } from '../utils/api/getCarrito';
-import CardItemsPedido from '../components/CardItemsPedido';
 import CardItemFinal from '../components/CardItemFinal';
+import { getDatosUsuario } from '../utils/api/datosUsuario';
+import { crearPedido } from '../utils/api/crearPedido';
 
 
 const Pedido = () => {
-
-
     const [arrCarrito, setArrCarrito] = useState([])
 
+    const [descuento, setDescuento] = useState(0)
+
+    const [nombre, setNombre] = useState("")
+    const [apellido, setApellido] = useState("")
+    const [total, setTotal] = useState(0);
+    const [direccion, setDireccion] = useState('')
+    const [iva, setIva] = useState('')
+    const [pago, setPago] = useState('')
+
     useEffect(() => {
-    
         const userDataStriong = localStorage.getItem('userData')
         const userDataJSON = JSON.parse(userDataStriong)
         const userId = userDataJSON.userId
+        const email = userDataJSON.email
     
         
         const obtenerCarrito = async () => {
-          const carrito = await getCarrito({userId})
-    
-          if (carrito == false) return
-    
-          setArrCarrito(carrito.productos);
+            const carrito = await getCarrito({userId})
+            if (carrito == false) return
+
+            setArrCarrito(carrito.productos);
+
+            setTotal(carrito.productos.reduce((acc, item) => {
+                return acc + item.cantidad * item.precio;
+            }, 0))
+
+            setDescuento(carrito.productos.reduce((acc, item) => {
+                return acc + item.descuento;
+            }, 0))
         }
-    
+
+        const datosUsuario = async () => {
+            const datos = await getDatosUsuario({email})
+            
+            setNombre(datos.nombre)
+            setApellido(datos.apellido)
+        }
+        
+
         obtenerCarrito()
+        datosUsuario()
       },[])
 
-      console.log(arrCarrito);
 
+    const userDataStriong = localStorage.getItem('userData')
+    const userDataJSON = JSON.parse(userDataStriong)
+    const userId = userDataJSON.userId
+
+    const handleClick = async () => {
+        const subtotal = total - descuento + total*0.21
+        const generarPedido = await crearPedido({arrCarrito, userId, nombre, apellido, direccion, iva, pago, subtotal})
+    }
 
   return (
     <>
@@ -39,46 +70,46 @@ const Pedido = () => {
         <div className="pedido-box-left">
             <div className='data-pedido'>
                 <label>Nombre:</label>
-                <p>Ignacio</p>
+                <p>{nombre}</p>
             </div>            
             <div className='data-pedido'>
                 <label>Apellido:</label>
-                <p>Billinghurst</p>
+                <p>{apellido}</p>
             </div>
             <div className='data-pedido'>
                 <label>Direccion:</label>
-                <input type="text"/>
+                <input type="text" onChange={event => setDireccion(event.target.value)}/>
             </div>
             <div className='data-pedido'>
                 <label>Condicion ante IVA:</label>
                 <div className='select-iva-conteiner'>
-                    <select className= 'select-iva-pedido' id="opciones">
-                        <option value="opcion1">Seleccione condicion ante el IVA</option>
-                        <option value="opcion2">IVA Responsable Inscripto</option>
-                        <option value="opcion3">IVA Responsable no Inscripto</option>
-                        <option value="opcion4">IVA no Responsable</option>
-                        <option value="opcion5">IVA Sujeto Exento</option>
-                        <option value="opcion6">Consumidor Final</option>
-                        <option value="opcion7">Responsable Monotributo</option>
-                        <option value="opcion8">Sujeto no Categorizado</option>
-                        <option value="opcion9">Proveedor del Exterior</option>
-                        <option value="opcion10">Cliente del Exterior</option>
-                        <option value="opcion11">IVA Liberado – Ley Nº 19.640</option>
-                        <option value="opcion12">IVA Responsable Inscripto – Agente de Percepción</option>
-                        <option value="opcion13">Pequeño Contribuyente Eventual</option>
-                        <option value="opcion14">Monotributista Social</option>
-                        <option value="opcion15">Pequeño Contribuyente Eventual Social</option>
+                    <select className= 'select-iva-pedido' id="opciones" onChange={event => setIva(event.target.value)}>
+                        <option value="Seleccione condicion ante el IVA">Seleccione condicion ante el IVA</option>
+                        <option value="IVA Responsable Inscripto">IVA Responsable Inscripto</option>
+                        <option value="IVA Responsable no Inscripto">IVA Responsable no Inscripto</option>
+                        <option value="IVA no Responsable">IVA no Responsable</option>
+                        <option value="IVA Sujeto Exento">IVA Sujeto Exento</option>
+                        <option value="Consumidor Final">Consumidor Final</option>
+                        <option value="Responsable Monotributo">Responsable Monotributo</option>
+                        <option value="Sujeto no Categorizado">Sujeto no Categorizado</option>
+                        <option value="Proveedor del Exterior">Proveedor del Exterior</option>
+                        <option value="Cliente del Exterior">Cliente del Exterior</option>
+                        <option value="IVA Liberado – Ley Nº 19.640">IVA Liberado – Ley Nº 19.640</option>
+                        <option value="IVA Responsable Inscripto – Agente de Percepción">IVA Responsable Inscripto – Agente de Percepción</option>
+                        <option value="Pequeño Contribuyente Eventual">Pequeño Contribuyente Eventual</option>
+                        <option value="Monotributista Social">Monotributista Social</option>
+                        <option value="Pequeño Contribuyente Eventual Social">Pequeño Contribuyente Eventual Social</option>
                     </select>
                 </div>
             </div>             
             <div className='data-pedido'>
                 <label>Metodo de pago:</label>
                 <div className='select-iva-conteiner'>
-                    <select className= 'select-iva-pedido' id="opciones">
+                    <select className= 'select-iva-pedido' id="opciones" onChange={event => setPago(event.target.value)}>
                         <option value="opcion1">Seleccione metodo de pago</option>
-                        <option value="opcion2">Efectivo</option>
-                        <option value="opcion2">Tarjeta Credito</option>
-                        <option value="opcion2">Tarjeta Debito</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta Credito">Tarjeta Credito</option>
+                        <option value="Tarjeta Debito">Tarjeta Debito</option>
                     </select>
                 </div>
             </div>            
@@ -90,23 +121,23 @@ const Pedido = () => {
                     <h5>Subtotal a pagar:</h5>
                 </div>
                 <div className='valor-precio'>
-                    <h5>$1000</h5>
-                    <h5>$1000</h5>
-                    <h5>$1000</h5>
-                    <h5>$1000</h5>
+                    <h5>${total}</h5>
+                    <h5>${descuento}</h5>
+                    <h5>${total*0.21}</h5>
+                    <h5>${total - descuento + total*0.21}</h5>
                 </div>
 
             </div>
-            <a className="pagar-pedido">Pagar Subtotal</a>
+            <a className="pagar-pedido" onClick={handleClick}>Pagar Subtotal</a>
         </div>
 
         <hr className='barra-pedido'/>
 
         <div className="pedido-box-right">
         <h3>PEDIDO</h3>
-        {/* {arrCarrito.map ((url) => (
-            <CardItemsPedido parametros={url} key={url.idProducto}/>
-          ))} */}
+        {arrCarrito.map((url) => (
+            <CardItemFinal url={url} key={url.idProducto}/>
+        ))}
         <CardItemFinal/>
         </div>
         
