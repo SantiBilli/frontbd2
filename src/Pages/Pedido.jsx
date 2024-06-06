@@ -105,19 +105,8 @@ const Pedido = () => {
                     <select className= 'select-iva-pedido' id="opciones" onChange={event => setIva(event.target.value)}>
                         <option value="Seleccione condicion ante el IVA">Seleccione condicion ante el IVA</option>
                         <option value="IVA Responsable Inscripto">IVA Responsable Inscripto</option>
-                        <option value="IVA Responsable no Inscripto">IVA Responsable no Inscripto</option>
-                        <option value="IVA no Responsable">IVA no Responsable</option>
-                        <option value="IVA Sujeto Exento">IVA Sujeto Exento</option>
                         <option value="Consumidor Final">Consumidor Final</option>
                         <option value="Responsable Monotributo">Responsable Monotributo</option>
-                        <option value="Sujeto no Categorizado">Sujeto no Categorizado</option>
-                        <option value="Proveedor del Exterior">Proveedor del Exterior</option>
-                        <option value="Cliente del Exterior">Cliente del Exterior</option>
-                        <option value="IVA Liberado – Ley Nº 19.640">IVA Liberado – Ley Nº 19.640</option>
-                        <option value="IVA Responsable Inscripto – Agente de Percepción">IVA Responsable Inscripto – Agente de Percepción</option>
-                        <option value="Pequeño Contribuyente Eventual">Pequeño Contribuyente Eventual</option>
-                        <option value="Monotributista Social">Monotributista Social</option>
-                        <option value="Pequeño Contribuyente Eventual Social">Pequeño Contribuyente Eventual Social</option>
                     </select>
                 </div>
             </div>             
