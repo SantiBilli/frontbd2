@@ -19,12 +19,17 @@ const Pedido = () => {
     const [total, setTotal] = useState(0);
     const [direccion, setDireccion] = useState("")
     const [iva, setIva] = useState('Seleccione condicion ante el IVA')
+    const [ivaValor, setIvaValor] = useState(0)
     const [pago, setPago] = useState('Seleccione metodo de pago')
     const navigate = useNavigate()
 
     const [enableButton, setEnableButton] = useState(false)
 
     useEffect(() => {
+        if (iva == 'IVA Responsable Inscripto') setIvaValor(0.21)
+        if (iva == 'Consumidor Final') setIvaValor(0.21)
+        if (iva == 'Responsable Monotributo') setIvaValor(0.27)
+
         if (direccion == "") return setEnableButton(false)
         if (nombre == "") return setEnableButton(false)
         if (apellido == "") return setEnableButton(false)
@@ -63,8 +68,6 @@ const Pedido = () => {
             setNombre(datos.nombre)
             setApellido(datos.apellido)
         }
-        
-        
 
         obtenerCarrito()
         datosUsuario()
@@ -76,8 +79,10 @@ const Pedido = () => {
     const userId = userDataJSON.userId
 
     const handleClick = async () => {
+
         const subtotal = total - descuento + total*0.21
         const generarPedido = await crearPedido({arrCarrito, userId, nombre, apellido, direccion, iva, pago, subtotal})
+        
 
         navigate('/inicio')
     }
@@ -131,7 +136,7 @@ const Pedido = () => {
                 <div className='valor-precio'>
                     <h5>${total}</h5>
                     <h5>${descuento}</h5>
-                    <h5>${total*0.21}</h5>
+                    <h5>${total*ivaValor}</h5>
                     <h5>${total - descuento + total*0.21}</h5>
                 </div>
 
