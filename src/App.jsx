@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Inicio from './Pages/Inicio';
 import Publicar from './Pages/Publicar';
 import Pedido from './Pages/Pedido';
+import HistorialPedidos from './Pages/HistorialPedidos';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/inicio" element={<Inicio/>}></Route>
           <Route path="/publicar" element={<Publicar/>}></Route>
           <Route path="/pedido" element={<Pedido/>}></Route>
+          <Route path="/mispedidos" element={<HistorialPedidos/>}></Route>
       </Routes>
     </>
   )
