@@ -6,9 +6,6 @@ const HistorialPedidos = () => {
     return (
         <>
             <Header/>
-            <div>
-                <h1>HISTORIAL DE PEDIDOS</h1>
-            </div>
             <div className='box-historial-pedidos'>
                 <CardHistorial/>
             </div>
