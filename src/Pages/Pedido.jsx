@@ -6,6 +6,7 @@ import CardItemFinal from '../components/CardItemFinal';
 import { getDatosUsuario } from '../utils/api/datosUsuario';
 import { crearPedido } from '../utils/api/crearPedido';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { crearFactura } from '../utils/api/crearFactura';
 
 
 
@@ -82,7 +83,7 @@ const Pedido = () => {
 
         const subtotal = total - descuento + total*0.21
         const generarPedido = await crearPedido({arrCarrito, userId, nombre, apellido, direccion, iva, pago, subtotal})
-        
+        const generarFactura = await crearFactura({nombre, apellido, direccion, iva, arrCarrito})
 
         navigate('/inicio')
     }

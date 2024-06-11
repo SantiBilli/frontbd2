@@ -28,7 +28,6 @@ const HistorialPedidos = () => {
           const pedidos = await historialPedidos({userId})
           if (pedidos == false) return
           setPedidos(pedidos);
-          console.log(pedidos);
         }
 
         sendTokenToServer()
@@ -42,7 +41,9 @@ const HistorialPedidos = () => {
         <>
             <Header/>
             <div className='box-historial-pedidos'>
-                <CardHistorial pedido={pedidos[0]}/>
+            {pedidos.map ((pedido) => (
+                <CardHistorial key={pedido._id} infoPedido={pedido}/>
+            ))}
             </div>
         </>
     )
