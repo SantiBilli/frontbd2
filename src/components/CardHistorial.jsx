@@ -3,6 +3,9 @@ import '../styles/CardHistorial.css'
 import { useNavigate } from 'react-router-dom';
 
 const CardHistorial = ({infoPedido}) => {
+
+    const date = new Date(infoPedido.fecha).toLocaleDateString();
+
     return(
         <div className='Card-Historial'>
             <div className='Card-Title'>
@@ -11,7 +14,7 @@ const CardHistorial = ({infoPedido}) => {
             <hr className='line-historial'></hr>
             <div className='box-historial'>
                 <div className='Left-Card'>
-                    <p>Fecha de pedido: {infoPedido.fecha}</p>
+                    <p>Fecha de pedido: {date}</p>
                     <p>Dirección: {infoPedido.direccion}</p>
                     <p>Tipo de pago: {infoPedido.pago}</p>
                     <p>Total pagado: {infoPedido.subtotal}</p>

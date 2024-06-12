@@ -4,10 +4,13 @@ import Header from '../components/Header'
 import CardHistorialFactura from '../components/CardHistorialFactura'
 import { historialFacturas } from '../utils/api/historialFacturas';
 import { sendToken } from '../utils/api/checkToken';
+import { useNavigate } from 'react-router-dom';
 
 const HistorialFacturas = () => {
 
   const [facturas, setFacturas] = useState([])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
       const token = localStorage.getItem('userToken')
@@ -26,7 +29,6 @@ const HistorialFacturas = () => {
       const obtenerFacturas = async () => {
         const facturas = await historialFacturas({userId})
         if (facturas == false) return
-        console.log(facturas);
         setFacturas(facturas);
       }
 
