@@ -10,6 +10,8 @@ const HistorialPedidos = () => {
 
     const [pedidos, setPedidos] = useState([])
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem('userToken')
 

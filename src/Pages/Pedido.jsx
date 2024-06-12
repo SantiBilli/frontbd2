@@ -42,6 +42,7 @@ const Pedido = () => {
     }, [direccion, nombre, apellido, iva, pago])
 
     useEffect(() => {
+
         const userDataStriong = localStorage.getItem('userData')
         const userDataJSON = JSON.parse(userDataStriong)
         const userId = userDataJSON.userId
