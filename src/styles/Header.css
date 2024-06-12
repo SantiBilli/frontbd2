@@ -16,6 +16,11 @@
     gap: 30px;
 }
 
+.header-mid {
+    display: flex;
+    gap: 40px;
+}
+
 .cart-header {
     background-color: rgb(255, 255, 255);
     border: none;
@@ -32,7 +37,13 @@
     border-radius: 50px;
     font-weight: 700;
     transition: 0.3s;
+    cursor: pointer;
 }
+
+.header-name{
+    cursor: pointer;
+}
+
 
 .header-upload:hover {
     background-color: transparent;

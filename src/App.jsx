@@ -8,6 +8,7 @@ import Inicio from './Pages/Inicio';
 import Publicar from './Pages/Publicar';
 import Pedido from './Pages/Pedido';
 import HistorialPedidos from './Pages/HistorialPedidos';
+import HistorialFacturas from './Pages/HistorialFacturas';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/publicar" element={<Publicar/>}></Route>
           <Route path="/pedido" element={<Pedido/>}></Route>
           <Route path="/mispedidos" element={<HistorialPedidos/>}></Route>
+          <Route path="/misfacturas" element={<HistorialFacturas/>}></Route>
       </Routes>
     </>
   )

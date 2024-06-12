@@ -1,7 +1,8 @@
 .pedido-box {
     display: flex;
     justify-content: space-evenly;
-    height: 100vh;
+    height: 100%;
+    margin-top: 5%;
     align-items: center;
 }
 
@@ -81,7 +82,7 @@
 
 .barra-pedido {
     border: 1px solid black;
-    height: 80%;
+    height: 500px;
 }
 
 .select-iva-pedido {

@@ -59,7 +59,7 @@ const Pedido = () => {
             }, 0))
 
             setDescuento(carrito.productos.reduce((acc, item) => {
-                return acc + item.descuento;
+                return acc + item.descuento*item.cantidad;
             }, 0))
         }
 
@@ -81,9 +81,9 @@ const Pedido = () => {
 
     const handleClick = async () => {
 
-        const subtotal = total - descuento + total*0.21
+        const subtotal = total - descuento + total*ivaValor
         const generarPedido = await crearPedido({arrCarrito, userId, nombre, apellido, direccion, iva, pago, subtotal})
-        const generarFactura = await crearFactura({nombre, apellido, direccion, iva, arrCarrito})
+        const generarFactura = await crearFactura({userId, nombre, apellido, direccion, iva, arrCarrito, total, descuento, ivaValor})
 
         navigate('/inicio')
     }
@@ -138,7 +138,7 @@ const Pedido = () => {
                     <h5>${total}</h5>
                     <h5>${descuento}</h5>
                     <h5>${total*ivaValor}</h5>
-                    <h5>${total - descuento + total*0.21}</h5>
+                    <h5>${total - descuento + total*ivaValor}</h5>
                 </div>
 
             </div>
