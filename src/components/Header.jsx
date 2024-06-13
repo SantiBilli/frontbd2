@@ -20,6 +20,7 @@ const Header = ({botonAdmin}) => {
         <div className="header-right">
             <button className='cart-header'><FaShoppingCart/></button>
             <button className = 'header-upload' style={{display: botonAdmin ? 'flex' : 'none'}} onClick={() => {navigate("/publicar")}}>UPLOAD<MdAddShoppingCart/></button>
+            <button className = 'header-upload' onClick={() => navigate("/login")} style={{color:"red", borderColor:"red"}}>Cerrar Sesion</button>
         </div>
     </header>
   )
